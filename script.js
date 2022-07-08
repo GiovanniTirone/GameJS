@@ -67,9 +67,10 @@ function playRound (playerSelection, computerSelection){
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase() ;
     let winner = undefined;
-    /*while ((playerSelection !== "rock") || (playerSelection !== "scissors") || (playerSelection !== "paper")){ 
+    /*while ((playerSelection !== "rock") && (playerSelection !== "scissors") && (playerSelection !== "paper")){ 
            playerSelection = (prompt("You must insert one value between the three proposed")).toLowerCase();      
-    }*/ 
+    } */ 
+
         switch(playerSelection){
             case computerSelection:
                 break;
@@ -95,6 +96,7 @@ function playRound (playerSelection, computerSelection){
                 }
                 break;
         }   
+
         
     return winner; 
 }
@@ -102,10 +104,14 @@ function playRound (playerSelection, computerSelection){
 
 
 function game (numeroRound) {
-    let roundVinti = "The winner of the rounds are: "; 
     let win = undefined;
+    let roundVinti = [];
+    let conteggio = [0,0];  /*posizone zero = You, pos 1 = Comp */
     for (let i=0; i<numeroRound; i++){
         let playerSelection = prompt("Insert a value between: Rock, Paper, Scissors");
+        while ((playerSelection !== "rock") && (playerSelection !== "scissors") && (playerSelection !== "paper")){ 
+                playerSelection = (prompt("You must insert one value between the three proposed")).toLowerCase();      
+        }  
         let computerSelection = computerPlay();
         console.log("The computer play at round " + i + " is " + computerSelection);
         console.log("Your play a round " + i + " is " + playerSelection);
@@ -113,20 +119,40 @@ function game (numeroRound) {
         switch (win){
             case true:
                 console.log("You win the round " + i );
-                roundVinti = roundVinti + " YOU ";
+                roundVinti[i]="Y";
+                conteggio[0] = conteggio[0] +1 ;  
                 break;
             case false:
                 console.log("You lose the round " + i);
-                roundVinti = roundVinti +" COMPUTER ";
+                roundVinti[i]="C";
+                conteggio[1] = conteggio[1] +1 ; 
                 break;
             case undefined:
                 console.log("Nobody win the round " + i);
-                roundVinti = roundVinti + " PATTA ";
+                roundVinti[i]="N";
                 break;
         } 
     }
-    return roundVinti; 
+
+    return [roundVinti , conteggio]; 
 }
 
-console.log(game(5));
+let n = prompt("Inserisci il numero di round");
+let ris = game(n);
+/*console.log(ris);*/
+let tabellone = "The results are: ";
+
+for (i=0; i<n; i++){
+    tabellone = tabellone + " - " + ris[0][i]; 
+}
+
+if (ris[1][0]>ris[1][1]){
+    tabellone = tabellone + " \n Hai vinto con un risultato di " + (ris[1][0]).toString() + " a " + (ris[1][1]).toString() ;
+} else if (ris[1][0]<ris[1][1] ) {
+    tabellone = tabellone + " \n Hai perso con un risultato di " + (ris[1][0]).toString() + " a " + (ris[1][1]).toString() ;   
+} else {
+    tabellone = tabellone + "\n Patta con un risultato di " + (ris[1][0]).toString() + "pari";  
+}
+
+console.log(tabellone);
 

@@ -53,23 +53,15 @@ function playRound (playerSelection, computerSelection){
 }
 */
 
-/*UN SOLO ROUND
-
-let playerSelection = prompt("Insert a value between: Rock, Paper, Scissors");
-let computerSelection = computerPlay();
-console.log("The computer play is " + computerSelection);
-console.log(playRound(playerSelection, computerSelection));
-*/
-
-/*funzione con winner come booleano*/
+/*funzione con winner come booleano
 
 function playRound (playerSelection, computerSelection){
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase() ;
     let winner = undefined;
-    /*while ((playerSelection !== "rock") && (playerSelection !== "scissors") && (playerSelection !== "paper")){ 
+    while ((playerSelection !== "rock") && (playerSelection !== "scissors") && (playerSelection !== "paper")){ 
            playerSelection = (prompt("You must insert one value between the three proposed")).toLowerCase();      
-    } */ 
+    } 
 
         switch(playerSelection){
             case computerSelection:
@@ -99,8 +91,37 @@ function playRound (playerSelection, computerSelection){
 
         
     return winner; 
-}
+}*/
 
+/*funzione rock,scissors,paper =321*/
+
+function playRound (playerSelection, computerSelection){
+    computerSelection = computerSelection.toLowerCase();
+    playerSelection = playerSelection.toLowerCase() ;
+    let winner = undefined;
+
+        if (computerSelection=="rock"){computerSelection=3}
+        else if (computerSelection=="scissors"){computerSelection=2}
+        else {computerSelection=1} ;
+    
+        if (playerSelection=="rock"){playerSelection=3}
+        else if (playerSelection=="scissors"){playerSelection=2}
+        else {playerSelection=1} ;
+        
+        if ( (playerSelection==1) && (computerSelection==3)){
+            winner = true;
+        }  
+        else if ((playerSelection==3) && (computerSelection==1)){
+            winner = false;
+        } 
+        else if (playerSelection > computerSelection){
+            winner = true;
+        }
+        else if (playerSelection < computerSelection){
+            winner = false;
+        }
+    return winner; 
+}
 
 
 function game (numeroRound) {
